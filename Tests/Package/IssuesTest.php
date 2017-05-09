@@ -50,7 +50,7 @@ class IssuesTest extends GitHubTestCase
 		$issue = new \stdClass;
 		$issue->title = '{title}';
 		$issue->milestone = '{milestone}';
-		$issue->labels = ['{label1}'];
+		$issue->labels = array('{label1}');
 		$issue->body = '{body}';
 		$issue->assignee = '{assignee}';
 
@@ -60,7 +60,7 @@ class IssuesTest extends GitHubTestCase
 			->will($this->returnValue($this->response));
 
 		$this->assertThat(
-			$this->object->create('{user}', '{repo}', '{title}', '{body}', '{assignee}', '{milestone}', ['{label1}']),
+			$this->object->create('{user}', '{repo}', '{title}', '{body}', '{assignee}', '{milestone}', array('{label1}')),
 			$this->equalTo(json_decode($this->sampleString))
 		);
 	}
@@ -78,9 +78,9 @@ class IssuesTest extends GitHubTestCase
 		$issue = new \stdClass;
 		$issue->title = '{title}';
 		$issue->milestone = '{milestone}';
-		$issue->labels = ['{label1}'];
+		$issue->labels = array('{label1}');
 		$issue->body = '{body}';
-		$issue->assignees = ['{assignee1}'];
+		$issue->assignees = array('{assignee1}');
 
 		$this->client->expects($this->once())
 			->method('post')
@@ -88,7 +88,7 @@ class IssuesTest extends GitHubTestCase
 			->will($this->returnValue($this->response));
 
 		$this->assertThat(
-			$this->object->create('{user}', '{repo}', '{title}', '{body}', null, '{milestone}', ['{label1}'], ['{assignee1}']),
+			$this->object->create('{user}', '{repo}', '{title}', '{body}', null, '{milestone}', array('{label1}'), array('{assignee1}')),
 			$this->equalTo(json_decode($this->sampleString))
 		);
 	}
@@ -108,7 +108,7 @@ class IssuesTest extends GitHubTestCase
 		$issue = new \stdClass;
 		$issue->title = '{title}';
 		$issue->milestone = '{milestone}';
-		$issue->labels = [];
+		$issue->labels = array();
 		$issue->body = '{body}';
 
 		$this->client->expects($this->once())
@@ -129,7 +129,7 @@ class IssuesTest extends GitHubTestCase
 	 */
 	public function testCreateFailure2()
 	{
-		$this->object->create('{user}', '{repo}', '{title}', '{body}', '{assignee]', '{milestone}', ['{label1}'], ['{assignee1]']);
+		$this->object->create('{user}', '{repo}', '{title}', '{body}', '{assignee]', '{milestone}', array('{label1}'), array('{assignee1]'));
 	}
 
 	/**
